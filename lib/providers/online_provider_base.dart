@@ -9,6 +9,7 @@ class OnlineProviderBase extends ChangeNotifier{
   late DioManager dio;
   late Options _options;
   late Response _response;
+  late BuildContext _context;
 
   set response(Response response){
     _response = response;
@@ -26,12 +27,14 @@ class OnlineProviderBase extends ChangeNotifier{
 
   LoadStatus get loadStatus => _loadStatus;
 
+  BuildContext get context => _context;
+
   set loadStatus(LoadStatus value) {
     _loadStatus = value;
     notifyListeners();
   }
 
-  OnlineProviderBase(this.dio){
+  OnlineProviderBase(this._context, this.dio){
     _options = Options(headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',

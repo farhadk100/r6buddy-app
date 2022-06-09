@@ -25,11 +25,11 @@ class MyApp extends StatelessWidget {
         title: 'R6Buddy',
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: Color.fromARGB(255, 7, 28, 54),
+          scaffoldBackgroundColor: Color.fromARGB(255, 33, 46, 80),
           textTheme: Typography(platform: TargetPlatform.iOS).white,
         ),
         routes: {
-          '/': (context) => ChangeNotifierProvider(create: (context) => OperatorsProvider(Provider.of<DioManager>(context, listen: false)), child: const OperatorsScreen()),
+          '/': (context) => ChangeNotifierProvider(create: (context) => OperatorsProvider(context, Provider.of<DioManager>(context, listen: false)), child: const OperatorsScreen()),
         },
       ),
     );

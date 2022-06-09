@@ -11,14 +11,15 @@ part 'operator_map.g.dart';
 /// JSON serialization logic to be generated.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Operator {
-  Operator(this.armor, this.speed, this.bio, this.name, this.iconUrl, this.key);
+  Operator(this.armor, this.speed, this.bio, this.loadout, this.name, this.iconUrl, this.portraitUrl, this.key);
 
   int armor;
   int speed;
   OperatorBio bio;
-  //OperatorLoadout loadout;
+  OperatorLoadout loadout;
   String? name;
   String iconUrl;
+  String portraitUrl;
   String key;
 
   /// A necessary factory constructor for creating a new Club instance

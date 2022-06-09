@@ -11,9 +11,17 @@ import 'package:r6buddy/utilities/connection_state.dart';
 class OperatorsProvider extends OnlineProviderBase {
 
   late List<Operator> operators = [];
+  bool _showAttackers = true;
 
-  OperatorsProvider(DioManager dio) : super(dio){
+  OperatorsProvider(BuildContext context, DioManager dio) : super(context,dio){
     getOperators();
+  }
+
+  bool get showAttackers => _showAttackers;
+
+  set showAttackers(bool value) {
+    _showAttackers = value;
+    notifyListeners();
   }
 
 
@@ -21,9 +29,8 @@ class OperatorsProvider extends OnlineProviderBase {
     loadStatus = LoadStatus.loading;
     notifyListeners();
     response = await dio.getRequest(Constants.operatorsApi, {}, options);
-    print('damn');
     if (response.statusCode == HttpStatus.ok){
-      operators = response.data['_items'].map((operator) => Operator.fromJson(operator)).toList().cast<Operator>();
+      operators = response.data.map((operator) => Operator.fromJson(operator)).toList().cast<Operator>();
       loadStatus = LoadStatus.loaded;
     } else {
       loadStatus = LoadStatus.error;
