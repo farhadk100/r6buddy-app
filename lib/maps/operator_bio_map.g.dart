@@ -7,9 +7,9 @@ part of 'operator_bio_map.dart';
 // **************************************************************************
 
 OperatorBio _$OperatorBioFromJson(Map<String, dynamic> json) => OperatorBio(
-      json['bio'] as String,
-      json['date_of_birth'] as String,
-      json['place_of_birth'] as String,
+      json['bio'] as String?,
+      json['date_of_birth'] as String?,
+      json['place_of_birth'] as String?,
       json['real_name'] as String,
     );
 

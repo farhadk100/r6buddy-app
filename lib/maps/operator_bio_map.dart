@@ -11,9 +11,9 @@ part 'operator_bio_map.g.dart';
 class OperatorBio {
   OperatorBio(this.bio, this.dateOfBirth, this.placeOfBirth, this.realName);
 
-  String bio;
-  String dateOfBirth;
-  String placeOfBirth;
+  String? bio;
+  String? dateOfBirth;
+  String? placeOfBirth;
   String realName;
 
   /// A necessary factory constructor for creating a new Club instance

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:r6buddy/providers/operators_provider.dart';
+import 'package:r6buddy/route_generator.dart';
 import 'package:r6buddy/utilities/dio_manager.dart';
-
-import 'screens/operators_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,11 +24,15 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Color.fromARGB(255, 33, 46, 80),
-          textTheme: Typography(platform: TargetPlatform.iOS).white,
+          textTheme: Typography(platform: TargetPlatform.iOS).white.copyWith(
+            subtitle1: const TextStyle(
+              color: Colors.white60,
+              fontSize: 16,
+            ),
+          ),
         ),
-        routes: {
-          '/': (context) => ChangeNotifierProvider(create: (context) => OperatorsProvider(context, Provider.of<DioManager>(context, listen: false)), child: const OperatorsScreen()),
-        },
+        initialRoute: '/',
+        onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
       ),
     );
   }

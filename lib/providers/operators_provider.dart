@@ -6,7 +6,7 @@ import 'package:r6buddy/maps/operator_map.dart';
 import 'package:r6buddy/providers/online_provider_base.dart';
 import 'package:r6buddy/utilities/constants.dart';
 import 'package:r6buddy/utilities/dio_manager.dart';
-import 'package:r6buddy/utilities/connection_state.dart';
+import 'package:r6buddy/utilities/enums.dart';
 
 class OperatorsProvider extends OnlineProviderBase {
 
@@ -14,21 +14,22 @@ class OperatorsProvider extends OnlineProviderBase {
   bool _showAttackers = true;
 
   OperatorsProvider(BuildContext context, DioManager dio) : super(context,dio){
-    getOperators();
+    getData();
   }
 
   bool get showAttackers => _showAttackers;
 
   set showAttackers(bool value) {
     _showAttackers = value;
-    notifyListeners();
+    getData();
   }
 
 
-  Future<dynamic> getOperators() async {
+  @override
+  Future<dynamic> getData() async {
     loadStatus = LoadStatus.loading;
     notifyListeners();
-    response = await dio.getRequest(Constants.operatorsApi, {}, options);
+    response = await dio.getRequest(Constants.operatorsApi, {'type': _showAttackers ? 'Attacker' : 'Defender'}, options);
     if (response.statusCode == HttpStatus.ok){
       operators = response.data.map((operator) => Operator.fromJson(operator)).toList().cast<Operator>();
       loadStatus = LoadStatus.loaded;
@@ -38,10 +39,11 @@ class OperatorsProvider extends OnlineProviderBase {
     return response;
   }
 
-  refresh(){
-    loadStatus = LoadStatus.idle;
-    getOperators();
+  goToOperatorPage(Operator operator){
+    Navigator.pushNamed(context, '/operatorInfo', arguments: operator);
   }
+
+
 
 
 }

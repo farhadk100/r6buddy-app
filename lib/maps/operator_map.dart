@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:r6buddy/maps/operator_bio_map.dart';
 import 'package:r6buddy/maps/operator_loadout_map.dart';
+import 'package:r6buddy/utilities/enums.dart';
 
 /// This allows the `Club` class to access private members in
 /// the generated file. The value for this is *.g.dart, where
@@ -11,13 +12,14 @@ part 'operator_map.g.dart';
 /// JSON serialization logic to be generated.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Operator {
-  Operator(this.armor, this.speed, this.bio, this.loadout, this.name, this.iconUrl, this.portraitUrl, this.key);
+  Operator(this.armor, this.speed, this.bio, this.type, this.loadout, this.name, this.iconUrl, this.portraitUrl, this.key);
 
   int armor;
   int speed;
+  OperatorType type;
   OperatorBio bio;
   OperatorLoadout loadout;
-  String? name;
+  String name;
   String iconUrl;
   String portraitUrl;
   String key;

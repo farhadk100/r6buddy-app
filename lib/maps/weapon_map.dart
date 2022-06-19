@@ -9,10 +9,11 @@ part 'weapon_map.g.dart';
 /// JSON serialization logic to be generated.
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Weapon {
-  Weapon(this.imageUrl, this.key, this.name);
+  Weapon(this.imageUrl, this.key, this.name, this.type);
 
   String imageUrl;
   String key;
+  String? type;
   String name;
 
   /// A necessary factory constructor for creating a new Club instance

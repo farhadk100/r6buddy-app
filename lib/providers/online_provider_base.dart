@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:r6buddy/utilities/constants.dart';
 import 'package:r6buddy/utilities/dio_manager.dart';
-import 'package:r6buddy/utilities/connection_state.dart';
+import 'package:r6buddy/utilities/enums.dart';
 import 'package:dio/dio.dart';
 
-class OnlineProviderBase extends ChangeNotifier{
+abstract class OnlineProviderBase extends ChangeNotifier{
 
   LoadStatus _loadStatus = LoadStatus.idle;
   late DioManager dio;
@@ -38,6 +39,14 @@ class OnlineProviderBase extends ChangeNotifier{
     _options = Options(headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'X-API-Key': Constants.apiKey,
     });
+  }
+
+  Future<dynamic> getData();
+
+  refresh(){
+    loadStatus = LoadStatus.idle;
+    getData();
   }
 }
